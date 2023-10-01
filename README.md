@@ -1,5 +1,10 @@
 
 
+# Reference
+
+* https://sigmoidanalytics.medium.com/process-workflow-for-running-spark-application-on-kubernetes-using-airflow-f09b6dc3cbf3
+* https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/blob/master/docs/quick-start-guide.md 
+
 # Steps
 
 ## Create Service account and do rolebinding 
@@ -46,7 +51,8 @@ https://github.com/GoogleCloudPlatform/spark-on-k8s-operator/issues/1078
 
 ## Issue with spark user access
 
-```Caused by: io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://kubernetes.default.svc/api/v1/namespaces/default/pods/spark-pi-driver. Message: Forbidden!Configured service account doesn't have access. Service account may have been revoked. pods "spark-pi-driver" is forbidden: User "system:serviceaccount:default:spark" cannot get resource "pods" in API group "" in the namespace "default".
+```
+Caused by: io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://kubernetes.default.svc/api/v1/namespaces/default/pods/spark-pi-driver. Message: Forbidden!Configured service account doesn't have access. Service account may have been revoked. pods "spark-pi-driver" is forbidden: User "system:serviceaccount:default:spark" cannot get resource "pods" in API group "" in the namespace "default".
 ```
 
 This was because clusterrolebinding was not properly created, ensure that proper namespace is used
